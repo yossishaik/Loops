@@ -5,18 +5,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        for (int x = 1; x <= 60; x++) {
-            System.out.println(x);
-        }
+        img = (ImageView) findViewById(R.id.imageView);
+        img.setTag(R.drawable.lion);
+        img.setOnClickListener(this);
     }
 
     @Override
@@ -40,5 +42,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (Integer.parseInt((v.getTag().toString()))) {
+            case R.drawable.lion:
+                img.setTag(R.drawable.dog);
+                img.setImageResource(R.drawable.dog);
+                break;
+
+            case R.drawable.dog:
+                img.setTag(R.drawable.eagle);
+                img.setImageResource(R.drawable.eagle);
+                break;
+
+            case R.drawable.eagle:
+                img.setTag(R.drawable.cat);
+                img.setImageResource(R.drawable.cat);
+                break;
+
+            case R.drawable.cat:
+                img.setTag(R.drawable.lion);
+                img.setImageResource(R.drawable.lion);
+                break;
+        }
     }
 }
